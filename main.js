@@ -1,30 +1,76 @@
-const STARTING_DIV_ID = "start";
+class Circle {
+  div = undefined;
+  mouse = undefined;
+  pxSize = 20;
+  x = 0;
+  y = 0;
 
-const startingDiv = getStartingDiv(STARTING_DIV_ID);
+  constructor(document) {
+    this.div = document.getElementById("start");
+    this.mouse = new Mouse(document);
+    const [x, y] = this.getDivPosition();
+    this.x = x;
+    this.y = y;
+  }
 
-setInterval(() => {
-  moveDivToRight(startingDiv);
-}, 10);
+  getDistancesFromCircleToMouse() {
+    return [this.mouse.x - this.x, this.mouse.y - this.y];
+  }
 
-function getStartingDiv(id) {
-  const div = document.getElementById(id);
-  if (!div) throw new Error("Impossible de récupérer la div");
-  return div;
-}
+  getDivPosition() {
+    const divRectangle = this.div.getBoundingClientRect();
+    return [
+      divRectangle.left + Math.floor(this.pxSize / 2),
+      divRectangle.top + Math.floor(this.pxSize / 2),
+    ];
+  }
 
-function moveDivToRight(startingDiv) {
-  const currentTranslation = startingDiv.style.transform;
-  if (!currentTranslation) startingDiv.style.transform = "translateX(10px)";
-  else {
-    const numberOfPixels = getNumberFromTranslateX(currentTranslation);
-    startingDiv.style.transform = setTranslateFromNumber(numberOfPixels + 1);
+  initiateMovement() {
+    setInterval(() => {
+      this.moveDivTowardsMouse(this.mouse);
+    }, 10);
+  }
+
+  moveDivTowardsMouse(mouse) {
+    const distances = this.getDistancesFromCircleToMouse();
+    console.log(distances);
+  }
+
+  moveDivTo(div, position) {
+    const currentTranslation = div.style.transform;
+    if (!currentTranslation) div.style.transform = "translateX(10px)";
+    else {
+      const numberOfPixels = getNumberFromTranslateX(currentTranslation);
+      div.style.transform = setTranslateFromNumber(numberOfPixels + 1);
+    }
+
+    function getNumberFromTranslateX(translate) {
+      return parseInt(translate.replace("translateX(", "").replace(")", ""));
+    }
+
+    function setTranslateFromNumber(n) {
+      return `translateX(${n}px)`;
+    }
   }
 }
 
-function getNumberFromTranslateX(translate) {
-  return parseInt(translate.replace("translateX(", "").replace(")", ""));
+class Mouse {
+  x = 0;
+  y = 0;
+
+  constructor(document) {
+    this.listenToMouseMovements(document);
+  }
+
+  listenToMouseMovements(document) {
+    document.addEventListener("mousemove", (event) => {
+      this.x = event.clientX;
+      this.y = event.clientY;
+    });
+  }
 }
 
-function setTranslateFromNumber(n) {
-  return `translateX(${n}px)`;
-}
+// ------------------------------------------------------------------------------
+
+const circle = new Circle(document);
+circle.initiateMovement();
