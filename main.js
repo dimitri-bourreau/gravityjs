@@ -8,7 +8,6 @@ setInterval(() => {
 
 function getStartingDiv(id) {
   const div = document.getElementById(id);
-  console.log(document);
   if (!div) throw new Error("Impossible de récupérer la div");
   return div;
 }
