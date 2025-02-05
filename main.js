@@ -27,22 +27,23 @@ class Circle {
 
   initiateMovement() {
     setInterval(() => {
-      this.moveDivTowardsMouse(this.mouse);
+      this.moveDivTowardsMouse();
     }, 10);
   }
 
-  moveDivTowardsMouse(mouse) {
+  moveDivTowardsMouse() {
     const distances = this.getDistancesFromCircleToMouse();
-    console.log(distances);
+    const nextPosition = [
+      Math.floor(distances[0]) - this.x,
+      Math.floor(distances[1]) - this.y,
+    ];
+    this.moveTo(nextPosition);
   }
 
-  moveDivTo(div, position) {
-    const currentTranslation = div.style.transform;
-    if (!currentTranslation) div.style.transform = "translateX(10px)";
-    else {
-      const numberOfPixels = getNumberFromTranslateX(currentTranslation);
-      div.style.transform = setTranslateFromNumber(numberOfPixels + 1);
-    }
+  moveTo(nextPosition) {
+    this.div.style.transform = `translate(${this.x + nextPosition[0]}px,${
+      this.y + nextPosition[1]
+    }px)`;
 
     function getNumberFromTranslateX(translate) {
       return parseInt(translate.replace("translateX(", "").replace(")", ""));
