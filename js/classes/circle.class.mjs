@@ -1,4 +1,6 @@
-class Circle {
+import Mouse from "./mouse.class.mjs";
+
+export default class Circle {
   div = undefined;
   mouse = undefined;
   pxSize = 20;
@@ -53,24 +55,3 @@ class Circle {
     this.div.style.height = `${this.pxSize}px`;
   }
 }
-
-class Mouse {
-  x = 0;
-  y = 0;
-
-  constructor(document) {
-    this.listenToMouseMovements(document);
-  }
-
-  listenToMouseMovements(document) {
-    document.addEventListener("mousemove", (event) => {
-      this.x = event.clientX;
-      this.y = event.clientY;
-    });
-  }
-}
-
-// ------------------------------------------------------------------------------
-
-const circle = new Circle(document);
-circle.initiateMovement();
