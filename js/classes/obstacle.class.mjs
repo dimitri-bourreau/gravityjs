@@ -19,7 +19,7 @@ export default class Obstacle {
     div.style.position = "absolute";
     div.style.top = `${x}px`;
     div.style.left = `${y}px`;
-    div.style.backgroundColor = "gold";
+    div.style.backgroundColor = "lightblue";
     div.style.border = "1px solid maroon";
     return div;
   }
