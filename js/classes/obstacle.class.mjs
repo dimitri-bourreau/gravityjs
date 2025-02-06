@@ -15,7 +15,7 @@ export default class Obstacle {
     const div = document.createElement("div");
     div.style.width = `${size}px`;
     div.style.height = div.style.width;
-    div.style.borderRadius = radius;
+    div.style.borderRadius = `${radius}%`;
     div.style.display = "absolute";
     div.style.top = x;
     div.style.left = y;
@@ -33,7 +33,7 @@ export default class Obstacle {
   }
 
   getRandomRadius() {
-    return 53;
+    return 87;
   }
 
   getRandomSize() {
