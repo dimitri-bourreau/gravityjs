@@ -16,9 +16,9 @@ export default class Obstacle {
     div.style.width = `${size}px`;
     div.style.height = div.style.width;
     div.style.borderRadius = `${radius}%`;
-    div.style.display = "absolute";
-    div.style.top = x;
-    div.style.left = y;
+    div.style.position = "absolute";
+    div.style.top = `${x}px`;
+    div.style.left = `${y}px`;
     div.style.backgroundColor = "gold";
     div.style.border = "1px solid maroon";
     return div;
@@ -29,7 +29,7 @@ export default class Obstacle {
   }
 
   getRandomPosition() {
-    return [50, 134];
+    return [200, 200];
   }
 
   getRandomRadius() {
