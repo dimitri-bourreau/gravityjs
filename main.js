@@ -8,6 +8,7 @@ class Circle {
   constructor(document) {
     this.div = document.getElementById("start");
     this.mouse = new Mouse(document);
+    this.updateSize();
     const [x, y] = this.getDivPosition();
     this.x = x;
     this.y = y;
@@ -25,33 +26,31 @@ class Circle {
     ];
   }
 
-  initiateMovement() {
-    setInterval(() => {
-      this.moveDivTowardsMouse();
-    }, 10);
-  }
-
-  moveDivTowardsMouse() {
+  getNextPosition() {
     const distances = this.getDistancesFromCircleToMouse();
-    const nextPosition = [
+    return [
       Math.floor(distances[0]) - this.x,
       Math.floor(distances[1]) - this.y,
     ];
-    this.moveTo(nextPosition);
+  }
+
+  initiateMovement() {
+    setInterval(() => {
+      const nextPosition = this.getNextPosition();
+      this.updateSize();
+      this.moveTo(nextPosition);
+    }, 10);
   }
 
   moveTo(nextPosition) {
     this.div.style.transform = `translate(${this.x + nextPosition[0]}px,${
       this.y + nextPosition[1]
     }px)`;
+  }
 
-    function getNumberFromTranslateX(translate) {
-      return parseInt(translate.replace("translateX(", "").replace(")", ""));
-    }
-
-    function setTranslateFromNumber(n) {
-      return `translateX(${n}px)`;
-    }
+  updateSize() {
+    this.div.style.width = `${this.pxSize}px`;
+    this.div.style.height = `${this.pxSize}px`;
   }
 }
 
