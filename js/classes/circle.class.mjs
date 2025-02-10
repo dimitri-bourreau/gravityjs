@@ -1,5 +1,3 @@
-import Mouse from "./mouse.class.mjs";
-
 export default class Circle {
   div = undefined;
   mouse = undefined;
@@ -7,11 +5,11 @@ export default class Circle {
   x = 0;
   y = 0;
 
-  constructor(document) {
+  constructor(document, mouse) {
     this.div = document.getElementById("start");
-    this.mouse = new Mouse(document);
     this.updateSize();
     const [x, y] = this.getDivPosition();
+    this.mouse = mouse;
     this.x = x;
     this.y = y;
   }

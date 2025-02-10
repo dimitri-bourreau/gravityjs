@@ -1,0 +1,25 @@
+.obstacle {
+  position: absolute;
+  background-color: lightblue;
+  border: 1px solid maroon;
+}
+
+/*
+* About the shadow 🔦
+* Height of the parent, the obstacle, is defined in obstacle.class.js, the shadow inherits from it.
+* We add 2px to the shadows's height and -1px to top to fit with the border of the parent
+*/
+.shadow-ref {
+  position: relative;
+}
+
+.shadow-ref::after {
+  position: absolute;
+  content: "";
+  width: 300px;
+  height: calc(100% + 2px);
+  top: var(--circle-y, 0);
+  left: var(--circle-x, 0);
+  background-color: black;
+  z-index: -1;
+}
