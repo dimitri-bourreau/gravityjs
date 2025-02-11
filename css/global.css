@@ -4,11 +4,6 @@ body {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(155, 132, 8, 0.83);
+  background-color: rgba(39, 33, 1, 0.83);
   overflow: hidden;
-}
-
-#start {
-  background-color: gold;
-  border-radius: 100%;
 }

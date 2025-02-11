@@ -1,0 +1,8 @@
+body::after {
+  position: absolute;
+  height: 50vh;
+  width: 50vw;
+  content: '';
+  top: calc(var(--mouseY, 200) - 25vh);
+  left: calc(var(--mouseX, 200) - 25vh);
+}

@@ -1,21 +1,9 @@
 export default class LightSource {
-  div = undefined;
   mouse = undefined;
-  pxSize = 20;
-  x = 0;
-  y = 0;
+  pxSize = 200;
 
-  constructor(document, mouse) {
-    this.div = document.getElementById("start");
-    this.updateSize();
-    const [x, y] = this.getDivPosition();
+  constructor(mouse) {
     this.mouse = mouse;
-    this.x = x;
-    this.y = y;
-  }
-
-  getDistancesFromCircleToMouse() {
-    return [this.mouse.x - this.x, this.mouse.y - this.y];
   }
 
   getDivPosition() {
@@ -26,30 +14,14 @@ export default class LightSource {
     ];
   }
 
-  getNextPosition() {
-    const distances = this.getDistancesFromCircleToMouse();
-    return [
-      Math.floor(distances[0]) - this.x,
-      Math.floor(distances[1]) - this.y,
-    ];
-  }
-
   initiateMovement() {
     setInterval(() => {
-      const nextPosition = this.getNextPosition();
-      this.updateSize();
-      this.moveTo(nextPosition);
+      this.moveTo({ x: this.mouse.x, y: this.mouse.y });
     }, 10);
   }
 
-  moveTo(nextPosition) {
-    this.div.style.transform = `translate(${this.x + nextPosition[0]}px,${
-      this.y + nextPosition[1]
-    }px)`;
-  }
-
-  updateSize() {
-    this.div.style.width = `${this.pxSize}px`;
-    this.div.style.height = `${this.pxSize}px`;
+  moveTo({ x, y }) {
+    document.body.style.setProperty("--mouseY", y);
+    document.body.style.setProperty("--mouseX", x);
   }
 }

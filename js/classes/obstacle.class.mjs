@@ -6,7 +6,7 @@ export default class Obstacle {
   y = undefined;
   size = undefined;
 
-  constructor(document, lightSource, mouse) {
+  constructor(lightSource, mouse) {
     this.lightSource = lightSource;
     this.mouse = mouse;
     this.buildObstacle(document);

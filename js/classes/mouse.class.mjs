@@ -2,11 +2,11 @@ export default class Mouse {
   x = 0;
   y = 0;
 
-  constructor(document) {
-    this.listenToMouseMovements(document);
+  constructor() {
+    this.listenToMouseMovements();
   }
 
-  listenToMouseMovements(document) {
+  listenToMouseMovements() {
     document.addEventListener("mousemove", (event) => {
       this.x = event.clientX;
       this.y = event.clientY;
