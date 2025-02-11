@@ -14,9 +14,8 @@ export default class Obstacle {
 
   buildObstacle(document) {
     const [x, y] = this.getRandomPosition();
-    const radius = this.getRandomRadius();
     const size = this.getRandomSize();
-    const div = this.createDiv({ document, x, y, radius, size });
+    const div = this.createDiv({ document, x, y, size });
     this.div = div;
     this.x = x;
     this.y = y;
@@ -24,11 +23,11 @@ export default class Obstacle {
     document.body.appendChild(div);
   }
 
-  createDiv({ document, x, y, radius, size }) {
+  createDiv({ document, x, y, size }) {
     const div = document.createElement("div");
     div.style.width = `${size}px`;
     div.style.height = div.style.width;
-    div.style.borderRadius = `${radius}%`;
+    div.style.borderRadius = "100%";
     div.style.top = `${x}px`;
     div.style.left = `${y}px`;
     div.className = "obstacle";
@@ -57,10 +56,6 @@ export default class Obstacle {
 
   getRandomPosition() {
     return [200, 200];
-  }
-
-  getRandomRadius() {
-    return 87;
   }
 
   getRandomSize() {
