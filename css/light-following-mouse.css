@@ -1,8 +1,15 @@
 body::after {
   position: absolute;
-  height: 50vh;
-  width: 50vw;
+  height: var(--light-size, 800px);
+  width: var(--light-size, 800px);
   content: '';
-  top: calc(var(--mouseY, 200) - 25vh);
-  left: calc(var(--mouseX, 200) - 25vh);
+  top: var(--mouseY, 200px);
+  left: var(--mouseX, 200px);
+  background: radial-gradient(gold, transparent 70%);
+  z-index: -2;
+  transition: opacity 0.2s;
+}
+
+body::after:hover {
+  opacity: .4;
 }
