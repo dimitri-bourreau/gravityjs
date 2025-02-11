@@ -7,5 +7,6 @@ const mouse = new Mouse(document);
 const lightSource = new LightSource(document, mouse);
 lightSource.initiateMovement();
 
-const obstacle = new Obstacle(document, lightSource, mouse);
-obstacle.followLightSource();
+[...new Array(20)].map(() =>
+  new Obstacle(document, lightSource, mouse).followLightSource()
+);
