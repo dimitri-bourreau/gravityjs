@@ -4,11 +4,6 @@
   border: 1px solid maroon;
 }
 
-/*
-* About the shadow 🔦
-* Height of the parent, the obstacle, is defined in obstacle.class.js, the shadow inherits from it.
-* We add 2px to the shadows's height and -1px to top to fit with the border of the parent
-*/
 .shadow-ref {
   position: relative;
 }
