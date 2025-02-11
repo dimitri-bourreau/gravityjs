@@ -59,7 +59,7 @@ export default class Obstacle {
   }
 
   getRandomSize() {
-    return 56;
+    return Math.random() * 300;
   }
 
   getShadowOrientation() {
