@@ -13,7 +13,7 @@ export default class Obstacle {
   }
 
   buildObstacle(document) {
-    const [x, y] = this.getRandomPosition();
+    const { x, y } = this.getRandomPosition();
     const size = this.getRandomSize();
     const div = this.createDiv({ document, x, y, size });
     this.div = div;
@@ -55,7 +55,10 @@ export default class Obstacle {
   }
 
   getRandomPosition() {
-    return [200, 200];
+    return {
+      x: Math.random() * window.screen.height,
+      y: Math.random() * window.screen.width,
+    };
   }
 
   getRandomSize() {
