@@ -4,10 +4,12 @@ export default class Obstacle {
   circle = undefined;
   x = undefined;
   y = undefined;
+  size = undefined;
 
-  constructor(circle, mouse) {
+  constructor(document, circle, mouse) {
     this.circle = circle;
     this.mouse = mouse;
+    this.buildObstacle(document);
   }
 
   buildObstacle(document) {
@@ -15,11 +17,11 @@ export default class Obstacle {
     const radius = this.getRandomRadius();
     const size = this.getRandomSize();
     const div = this.createDiv({ document, x, y, radius, size });
-    this.drawObstacleOn(div);
     this.div = div;
     this.x = x;
     this.y = y;
-    this.shapeShadow(div);
+    this.size = size;
+    document.body.appendChild(div);
   }
 
   createDiv({ document, x, y, radius, size }) {
@@ -34,15 +36,23 @@ export default class Obstacle {
     return div;
   }
 
-  drawObstacleOn(div) {
-    document.body.appendChild(div);
+  drawShadow() {
+    const right = `${Math.floor(this.size / 2)}px`;
+    const rotation = `${this.getShadowOrientation()}deg`;
+    this.div.style.setProperty("--shadow-right", right);
+    this.div.style.setProperty("--shadow-rotate", rotation);
   }
 
-  shapeShadow(div) {
-    setInterval(() => {
-      div.style.setProperty("--circle-y", `${this.y - this.mouse.y}px`);
-      div.style.setProperty("--circle-x", `${this.x - this.mouse.x}px`);
-    }, 10);
+  getAngleOfTriangleFromObstacleToLightSource() {
+    const { x, y } = this.getDistancesFromMouse();
+    return (Math.atan2(y, x) * 180) / Math.PI;
+  }
+
+  getDistancesFromMouse() {
+    return {
+      x: this.mouse.x - (this.x + this.size / 2),
+      y: this.mouse.y - (this.y + this.size / 2),
+    };
   }
 
   getRandomPosition() {
@@ -55,5 +65,23 @@ export default class Obstacle {
 
   getRandomSize() {
     return 56;
+  }
+
+  getShadowOrientation() {
+    const angle = this.getAngleOfTriangleFromObstacleToLightSource();
+    return angle;
+  }
+
+  followLightSource() {
+    setInterval(() => {
+      this.updateObstaclePosition();
+      this.drawShadow();
+    }, 10);
+  }
+
+  updateObstaclePosition() {
+    const { left, top } = this.div.getBoundingClientRect();
+    this.x = left;
+    this.y = top;
   }
 }

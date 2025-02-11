@@ -16,10 +16,13 @@
 .shadow-ref::after {
   position: absolute;
   content: "";
-  width: 300px;
-  height: calc(100% + 2px);
-  top: var(--circle-y, 0);
-  left: var(--circle-x, 0);
+  width: 200vw;
+  height: 100%;
+  top: 0px;
+  right: var(--shadow-right, 0);
+  transform: rotate(var(--shadow-rotate, 0));
+  transform-origin: center right;
+  border: 1px solid black;
   background-color: black;
   z-index: -1;
 }

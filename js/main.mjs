@@ -7,5 +7,5 @@ const mouse = new Mouse(document);
 const circle = new Circle(document, mouse);
 circle.initiateMovement();
 
-const obstacle = new Obstacle(circle, mouse);
-obstacle.buildObstacle(document);
+const obstacle = new Obstacle(document, circle, mouse);
+obstacle.followLightSource();
