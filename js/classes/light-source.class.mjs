@@ -1,4 +1,4 @@
-export default class Circle {
+export default class LightSource {
   div = undefined;
   mouse = undefined;
   pxSize = 20;

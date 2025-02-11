@@ -1,13 +1,13 @@
 export default class Obstacle {
   div = undefined;
   mouse = undefined;
-  circle = undefined;
+  lightSource = undefined;
   x = undefined;
   y = undefined;
   size = undefined;
 
-  constructor(document, circle, mouse) {
-    this.circle = circle;
+  constructor(document, lightSource, mouse) {
+    this.lightSource = lightSource;
     this.mouse = mouse;
     this.buildObstacle(document);
   }

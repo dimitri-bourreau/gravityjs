@@ -1,11 +1,11 @@
-import Circle from "./classes/circle.class.mjs";
 import Obstacle from "./classes/obstacle.class.mjs";
 import Mouse from "./classes/mouse.class.mjs";
+import LightSource from "./classes/light-source.class.mjs";
 
 const mouse = new Mouse(document);
 
-const circle = new Circle(document, mouse);
-circle.initiateMovement();
+const lightSource = new LightSource(document, mouse);
+lightSource.initiateMovement();
 
-const obstacle = new Obstacle(document, circle, mouse);
+const obstacle = new Obstacle(document, lightSource, mouse);
 obstacle.followLightSource();
