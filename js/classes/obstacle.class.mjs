@@ -36,21 +36,24 @@ export default class Obstacle {
   }
 
   drawShadow() {
+    const { x, y, distance } = this.getDistancesFromMouse();
     const right = `${Math.floor(this.size / 2)}px`;
-    const rotation = `${this.getShadowOrientation()}deg`;
+    const rotation = `${this.getShadowOrientation({ x, y })}deg`;
     this.div.style.setProperty("--shadow-right", right);
     this.div.style.setProperty("--shadow-rotate", rotation);
   }
 
-  getAngleOfTriangleFromObstacleToLightSource() {
-    const { x, y } = this.getDistancesFromMouse();
+  getAngleOfTriangleFromObstacleToLightSource({ x, y }) {
     return (Math.atan2(y, x) * 180) / Math.PI;
   }
 
   getDistancesFromMouse() {
+    const x = this.mouse.x - (this.x + this.size / 2);
+    const y = this.mouse.y - (this.y + this.size / 2);
     return {
-      x: this.mouse.x - (this.x + this.size / 2),
-      y: this.mouse.y - (this.y + this.size / 2),
+      x,
+      y,
+      distance: Math.hypot(x, y),
     };
   }
 
@@ -65,8 +68,8 @@ export default class Obstacle {
     return Math.random() * 300;
   }
 
-  getShadowOrientation() {
-    const angle = this.getAngleOfTriangleFromObstacleToLightSource();
+  getShadowOrientation({ x, y }) {
+    const angle = this.getAngleOfTriangleFromObstacleToLightSource({ x, y });
     return angle;
   }
 
