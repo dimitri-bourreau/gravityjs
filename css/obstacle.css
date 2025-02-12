@@ -10,12 +10,13 @@
 .shadow-ref::after {
   position: absolute;
   content: "";
-  width: 200vw;
-  height: 96%;
-  top: 0px;
+  width: 800px;
+  height: 200%;
+  top: -50%;
   right: var(--shadow-right, 0);
   transform: rotate(var(--shadow-rotate, 0));
   transform-origin: center right;
+  clip-path: polygon(var(--shadow-path, "100% 100%,100% 100%,100% 100%,100% 100%"));
   background-color: black;
   z-index: -1;
 }

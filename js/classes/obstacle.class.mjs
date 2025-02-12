@@ -39,8 +39,10 @@ export default class Obstacle {
     const { x, y, distance } = this.getDistancesFromMouse();
     const right = `${Math.floor(this.size / 2)}px`;
     const rotation = `${this.getShadowOrientation({ x, y })}deg`;
+    const shadowPath = this.getShadowPath(distance);
     this.div.style.setProperty("--shadow-right", right);
     this.div.style.setProperty("--shadow-rotate", rotation);
+    this.div.style.setProperty("--shadow-path", shadowPath);
   }
 
   getAngleOfTriangleFromObstacleToLightSource({ x, y }) {
@@ -71,6 +73,17 @@ export default class Obstacle {
   getShadowOrientation({ x, y }) {
     const angle = this.getAngleOfTriangleFromObstacleToLightSource({ x, y });
     return angle;
+  }
+
+  getShadowPath(distance) {
+    const ratio = distance / 10;
+    const topLeft = [0, 25 + ratio];
+    const topRight = [100, 25];
+    const bottomRight = [100, 75];
+    const bottomLeft = [0, 75 - ratio];
+    return [topLeft, topRight, bottomRight, bottomLeft]
+      .map((coordinates) => coordinates.map((n) => `${n}%`).join(" "))
+      .join(", ");
   }
 
   followLightSource() {
